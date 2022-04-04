@@ -10,13 +10,15 @@ public class CompanionAI : MonoBehaviour
     float angle = 0;
     float rotationA = 0;
 
-    public enum Mode {
-    IDLE,
-    STEALTH,
-    ATTACK
+    enum Mode
+    {
+        IDLE,
+        STEALTH,
+        ATTACK
     };
 
-    public Mode currentMode;
+    [SerializeField]
+    Mode currentMode;
     Mode oldMode;
 
     // Start is called before the first frame update
@@ -68,8 +70,20 @@ public class CompanionAI : MonoBehaviour
             {
                 oldMode = Mode.ATTACK;
                 transform.localPosition = new Vector3(0.5f * Mathf.Cos(rotationA), transform.localPosition.y, 0.5f * Mathf.Sin(rotationA));
-                rotationA += 2*Time.deltaTime;
+                rotationA += 2 * Time.deltaTime;
             }
+        }
+        if (Input.GetKey(KeyCode.J))
+        {
+            currentMode = Mode.IDLE;
+        }
+        if (Input.GetKey(KeyCode.K))
+        {
+            currentMode = Mode.STEALTH;
+        }
+        if (Input.GetKey(KeyCode.L))
+        {
+            currentMode = Mode.ATTACK;
         }
     }
 }
